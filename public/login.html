@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+
+    <style>
+        body{
+            margin:0;
+            font-family:Arial, sans-serif;
+            background:#f4f4f4;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            height:100vh;
+        }
+
+        .container{
+            background:white;
+            padding:30px;
+            width:320px;
+            border-radius:10px;
+            box-shadow:0 0 10px rgba(0,0,0,0.2);
+        }
+
+        h2{
+            text-align:center;
+        }
+
+        input{
+            width:100%;
+            padding:10px;
+            margin:10px 0;
+            box-sizing:border-box;
+        }
+
+        button{
+            width:100%;
+            padding:10px;
+            cursor:pointer;
+        }
+
+        button:hover{
+            background:#ddd;
+        }
+    </style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>Login</h2>
+
+<input id="email" type="email" placeholder="Enter Email">
+
+<input id="password" type="password" placeholder="Enter Password">
+
+<button onclick="login()">Login</button>
+
+</div>
+
+<script>
+async function login(){
+
+    const email=document.getElementById("email").value;
+    const password=document.getElementById("password").value;
+
+    const response=await fetch("/login",{
+
+        method:"POST",
+
+        headers:{
+            "Content-Type":"application/json"
+        },
+
+        body:JSON.stringify({
+            email,
+            password
+        })
+
+    });
+
+    const message=await response.text();
+
+    if(message==="Login Successful ✅"){
+        window.location.href="/dashboard.html";
+    }
+    else{
+        alert(message);
+    }
+
+}
+</script>
+
+</body>
+</html>
