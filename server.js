@@ -1,11 +1,12 @@
+require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const path = require("path");
 
-const User = require("./models/User");
+const User = require("./models/user.js");
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 // ================= MIDDLEWARE =================
 app.use(express.json());
@@ -13,9 +14,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
 // ================= MONGODB CONNECTION =================
-mongoose.connect("mongodb+srv://app:<db_password>@cluster0.mukelc8.mongodb.net/?appName=Cluster0")
-.then(() => console.log("MongoDB Connected"))
-.catch((err) => console.log("MongoDB Error:", err));
+mongoose.connect(process.env.MONGO_URI)
+  .then(() => console.log("MongoDB Connected"))
+  .catch((err) => console.log("MongoDB Error:", err));
 
 // ================= ROUTES =================
 
@@ -82,5 +83,5 @@ app.post("/login", async (req, res) => {
 
 // ================= START SERVER =================
 app.listen(PORT, () => {
-    console.log(`Server running on http://localhost:${PORT}`);
+  console.log(`Server running on port ${PORT}`);
 });
