@@ -13,7 +13,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
 // ================= MONGODB CONNECTION =================
-mongoose.connect("mongodb://127.0.0.1:27017/loginDB")
+mongoose.connect("mongodb+srv://app:<db_password>@cluster0.mukelc8.mongodb.net/?appName=Cluster0")
 .then(() => console.log("MongoDB Connected"))
 .catch((err) => console.log("MongoDB Error:", err));
 
